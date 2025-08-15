@@ -51,7 +51,7 @@ position = Vector2(-12, 0)
 sprite_frames = SubResource("SpriteFrames_8qli8")
 animation = &"Plasma"
 autoplay = "Plasma"
-frame_progress = 0.475768
+frame_progress = 0.496131
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

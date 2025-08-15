@@ -1,3 +1,4 @@
+class_name State_Machine
 extends Node2D
 
 @export 

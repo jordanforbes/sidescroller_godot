@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b0ruvwgrs4ihe"]
+[gd_scene load_steps=62 format=3 uid="uid://b0ruvwgrs4ihe"]
 
 [ext_resource type="Script" uid="uid://craqs0ave3quw" path="res://Scenes/Player/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://ddqwgqrv0b7g" path="res://Assets/Characters/space-marine/Spritesheet.png" id="1_rpqav"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://cf0ssd0kj6ix7" path="res://Scenes/Player/shoot.gd" id="9_825xp"]
 [ext_resource type="Script" uid="uid://boc5kgwywnrgt" path="res://Scenes/state.gd" id="10_ji083"]
 [ext_resource type="PackedScene" uid="uid://duughbx5f6qsn" path="res://Scenes/Player/Projectile.tscn" id="11_i5acl"]
-[ext_resource type="Script" uid="uid://ch02sah5bds8c" path="res://Scenes/Player/attack_machine.gd" id="12_epg6k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fk5o5"]
 size = Vector2(16, 35)
@@ -410,9 +409,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "state_label")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_label")]
 script = ExtResource("1_kyqiw")
-state_machine = NodePath("State_Machine")
 state_label = NodePath("State_Label")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -428,7 +426,7 @@ visible = false
 position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_tgfvv")
 animation = &"Shoot_Idle"
-frame_progress = 0.928164
+frame_progress = 0.823308
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(-39, -30)
@@ -478,9 +476,10 @@ jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 projectile_scene = ExtResource("11_i5acl")
 
-[node name="Attack_Machine" type="Node2D" parent="."]
+[node name="Attack_Machine" type="Node2D" parent="." node_paths=PackedStringArray("starting_state")]
 visible = false
-script = ExtResource("12_epg6k")
+script = ExtResource("3_jmcll")
+starting_state = NodePath("Shoot_Idle")
 
 [node name="Shoot_Idle" type="Node" parent="Attack_Machine"]
 script = ExtResource("10_ji083")

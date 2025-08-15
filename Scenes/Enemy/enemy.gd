@@ -10,19 +10,32 @@ var Name := "Ogre"
 @export 
 var HP := 10
 
+#labels
+@export
+var name_label: Label
+@export
+var hp_label: Label
+
 func _ready() -> void:
 	update_hp(HP)
-	$NameLabel.text = Name
+	name_label.text = Name
 
+#damage functions
 func change_hp(dmg: int) -> void:
-	HP -= dmg
-	if HP > 0:
-		update_hp(HP)
-	else:
+	HP += dmg
+
+func die() -> void:
+	if HP <= 0:
 		self.queue_free()
 		
+func take_damage(dmg: int) -> void:
+	change_hp(-dmg)
+	die()
+	update_hp(HP)
+		
+#update label's HP
 func update_hp(hit_pts: int) -> void:
-	$HPLabel.text = "HP: "+str(hit_pts)
+	hp_label.text = "HP: "+str(hit_pts)
 	
 func _physics_process(delta: float) -> void:
 	pass

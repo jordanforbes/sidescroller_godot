@@ -12,7 +12,7 @@ func enter()-> void:
 
 func process_physics(delta: float) -> State:
 	parent.velocity.y += gravity * delta
-	parent.update_velocity()
+	#parent.update_velocity()
 	
 	var movement = Input.get_axis("Left", "Right") * parent.move_speed
 	

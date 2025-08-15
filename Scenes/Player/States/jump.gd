@@ -16,7 +16,7 @@ func enter() -> void:
 	update_statename("Jump")
 
 func process_physics(delta: float) -> State:
-	parent.update_velocity()
+	#parent.update_velocity()
 	parent.velocity.y += gravity * delta
 	parent.velocity.x = Input.get_axis('Left', 'Right') * parent.move_speed
 	parent.move_and_slide()

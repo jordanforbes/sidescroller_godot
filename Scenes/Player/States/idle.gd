@@ -19,7 +19,7 @@ func enter() -> void:
 	
 
 func process_input(event: InputEvent) -> State:
-	parent.update_velocity()
+	#parent.update_velocity()
 
 	if Input.is_action_just_pressed('Jump') and parent.is_on_floor():
 		print("space bar pressed")

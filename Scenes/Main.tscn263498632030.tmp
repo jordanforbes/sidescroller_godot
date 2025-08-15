@@ -167,6 +167,5 @@ position = Vector2(-111, -2)
 [node name="Projectile" parent="." instance=ExtResource("4_rgh2o")]
 visible = false
 position = Vector2(40, -6)
-
-[node name="Enemy2" parent="." instance=ExtResource("3_kln2b")]
-position = Vector2(-51, -3)
+speed = null
+direction = null

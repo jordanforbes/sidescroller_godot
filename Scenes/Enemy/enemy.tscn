@@ -43,8 +43,10 @@ animations = [{
 radius = 20.0
 height = 58.0
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("name_label", "hp_label")]
 script = ExtResource("1_nvvbs")
+name_label = NodePath("NameLabel")
+hp_label = NodePath("HPLabel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_gx76c")
