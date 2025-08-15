@@ -5,6 +5,8 @@ extends State
 var idle_state: State
 @export 
 var walk_state: State
+@export 
+var shoot_state: State
 
 func enter()-> void:
 	update_statename("Fall")
@@ -15,6 +17,10 @@ func process_physics(delta: float) -> State:
 	#parent.update_velocity()
 	
 	var movement = Input.get_axis("Left", "Right") * parent.move_speed
+	
+	if Input.is_action_just_pressed("Shoot"):
+		print("shoot pressed")
+		return shoot_state
 	
 	if movement != 0:
 		parent.animations.flip_h = movement < 0

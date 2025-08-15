@@ -1,13 +1,15 @@
 extends State
 
+#@export 
+#var idle_state: State
+#@export 
+#var walk_state: State 
+#@export 
+#var jump_state: State
+#@export 
+#var fall_state: State
 @export 
-var idle_state: State
-@export 
-var walk_state: State 
-@export 
-var jump_state: State
-@export 
-var fall_state: State
+var no_attack_state: State
 
 @export 
 var projectile_scene: PackedScene
@@ -16,17 +18,25 @@ var projectile_spawn_offset := Vector2(20,-7) #gun barrrel position
 
 var finished = false
 
+signal shot_finished
+
 
 # Called when the node enters the scene tree for the first time.
 func enter()-> void:
-	#super()
+	super()
 	finished = false
 	play()
 	spawn_projectile()
-	#update_statename("Shoot")
 	
 func play() -> void: 
-	parent.animations.play("Shoot")
+	if !parent.is_on_floor():
+		parent.animations.play("Shoot_Air")
+	else:
+		if Input.is_action_pressed("Left") or Input.is_action_pressed("Right"):
+			parent.animations.play("Shoot_Walk")
+		else:
+			parent.animations.play("Shoot")
+
 	
 func spawn_projectile() -> void:
 	if projectile_scene:
@@ -50,15 +60,22 @@ func _on_animations_animation_finished() -> void:
 	finished = true 
 	
 func process_physics(delta:float) -> State: 
+	 # Apply gravity
+	parent.velocity.y += gravity * delta
+	
+	# Keep horizontal velocity if moving
+	var movement = 0.0
+	if Input.is_action_pressed("Left"):
+		movement -= parent.move_speed
+	if Input.is_action_pressed("Right"):
+		movement += parent.move_speed
+	parent.velocity.x = movement
+	
+	# Move character
+	parent.move_and_slide()
 	if finished == true: 
+		shot_finished.emit()
 		finished = false
-		if Input.is_action_just_pressed('Jump') and parent.is_on_floor():
-			print("space bar pressed")
-			return jump_state
-		elif Input.is_action_pressed('Left') or Input.is_action_just_pressed("Right") and parent.is_on_floor():
-			print("walk state keys pressed")
-			return walk_state
-		else:
-			return idle_state
+		return no_attack_state
 	else:
 		return null

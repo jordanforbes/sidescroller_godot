@@ -8,7 +8,7 @@ var current_state: State
 
 
 #initialize state machine by giving each child a reference to the parent Player class 
-func init(parent: Player) -> void:
+func init(parent: CharacterBody2D) -> void:
 	for child in get_children():
 		child.parent = parent
 		print(child.parent)

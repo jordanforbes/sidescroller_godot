@@ -2,7 +2,7 @@ class_name State
 extends Node
 
 @export
-var animation_name: String
+var animation_name:= "null"
 @export 
 var statelabel: Label
 
@@ -15,7 +15,8 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var parent: CharacterBody2D
 
 func enter() -> void:
-	parent.animations.play(animation_name)
+	if animation_name != "null":
+		parent.animations.play(animation_name)
 
 func exit() -> void:
 	pass

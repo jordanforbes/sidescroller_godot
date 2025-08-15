@@ -7,6 +7,8 @@ var idle_state: State
 var walk_state: State 
 @export 
 var fall_state: State
+@export
+var shoot_state: State
 
 
 func enter() -> void: 
@@ -20,6 +22,10 @@ func process_physics(delta: float) -> State:
 	parent.velocity.y += gravity * delta
 	parent.velocity.x = Input.get_axis('Left', 'Right') * parent.move_speed
 	parent.move_and_slide()
+	
+	if Input.is_action_just_pressed("Shoot"):
+		print("shoot pressed")
+		return shoot_state
 	
 	if parent.velocity.y > 0:
 		return fall_state

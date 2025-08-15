@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://b0ruvwgrs4ihe"]
+[gd_scene load_steps=63 format=3 uid="uid://b0ruvwgrs4ihe"]
 
 [ext_resource type="Script" uid="uid://craqs0ave3quw" path="res://Scenes/Player/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://ddqwgqrv0b7g" path="res://Assets/Characters/space-marine/Spritesheet.png" id="1_rpqav"]
@@ -257,50 +257,6 @@ region = Rect2(0, 480, 75, 48)
 atlas = ExtResource("1_rpqav")
 region = Rect2(75, 480, 75, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b7nrf"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(150, 432, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ykffh"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(0, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5xs4v"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(75, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4emfg"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(150, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ntbx5"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(225, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t4n31"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(300, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mhihw"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(375, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r6bkq"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(450, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yygk0"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(525, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m2cil"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(600, 240, 75, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g14s4"]
-atlas = ExtResource("1_rpqav")
-region = Rect2(675, 240, 75, 48)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_spxdj"]
 atlas = ExtResource("1_rpqav")
 region = Rect2(0, 288, 75, 48)
@@ -420,49 +376,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b7nrf")
-}],
-"loop": false,
-"name": &"Shoot_Air",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ykffh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5xs4v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4emfg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ntbx5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t4n31")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mhihw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r6bkq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yygk0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m2cil")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g14s4")
-}],
-"loop": false,
-"name": &"Shoot_Walk",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_spxdj")
 }, {
 "duration": 1.0,
@@ -497,10 +410,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "attack_machine", "animations", "state_label")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("state_machine", "animations", "state_label")]
 script = ExtResource("1_kyqiw")
 state_machine = NodePath("State_Machine")
-attack_machine = NodePath("Attack_Machine")
 animations = NodePath("Animations")
 state_label = NodePath("State_Label")
 
@@ -517,12 +429,12 @@ visible = false
 position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_tgfvv")
 animation = &"Shoot_Idle"
-frame_progress = 0.328613
+frame_progress = 0.231786
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(-39, -30)
 sprite_frames = SubResource("SpriteFrames_nn08x")
-animation = &"Shoot_Walk"
+animation = &"Jump"
 autoplay = "Idle"
 centered = false
 
@@ -535,7 +447,7 @@ script = ExtResource("4_4wape")
 walk_state = NodePath("../Walk")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
-shoot_state = NodePath("../Shoot")
+shoot_state = NodePath("../../Attack_Machine/Shoot")
 statelabel = NodePath("../../State_Label")
 
 [node name="Walk" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("idle_state", "jump_state", "fall_state", "shoot_state", "statelabel")]
@@ -543,38 +455,32 @@ script = ExtResource("5_t26db")
 idle_state = NodePath("../Idle")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
-shoot_state = NodePath("../Shoot")
+shoot_state = NodePath("../../Attack_Machine/Shoot")
 statelabel = NodePath("../../State_Label")
 
-[node name="Jump" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("idle_state", "walk_state", "fall_state", "shoot_state", "statelabel")]
+[node name="Jump" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("idle_state", "walk_state", "fall_state", "statelabel")]
 script = ExtResource("6_4wape")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
 fall_state = NodePath("../Fall")
-shoot_state = NodePath("../Shoot")
 statelabel = NodePath("../../State_Label")
 
-[node name="Fall" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("idle_state", "walk_state", "shoot_state", "statelabel")]
+[node name="Fall" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("idle_state", "walk_state", "statelabel")]
 script = ExtResource("7_t26db")
 idle_state = NodePath("../Idle")
 walk_state = NodePath("../Walk")
-shoot_state = NodePath("../Shoot")
 statelabel = NodePath("../../State_Label")
 
-[node name="Shoot" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("no_attack_state")]
-script = ExtResource("9_825xp")
-no_attack_state = NodePath("../Idle")
-projectile_scene = ExtResource("11_i5acl")
-animation_name = "Shoot"
-
-[node name="Attack_Machine" type="Node2D" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="Attack_Machine" type="Node2D" parent="."]
 visible = false
 script = ExtResource("12_epg6k")
-starting_state = NodePath("no_attack")
 
-[node name="no_attack" type="Node" parent="Attack_Machine" node_paths=PackedStringArray("shoot_state")]
+[node name="Shoot" type="Node2D" parent="Attack_Machine"]
+script = ExtResource("9_825xp")
+projectile_scene = ExtResource("11_i5acl")
+
+[node name="no_attack" type="Node" parent="Attack_Machine"]
 script = ExtResource("13_epg6k")
-shoot_state = NodePath("../../State_Machine/Shoot")
 metadata/_custom_type_script = "uid://boc5kgwywnrgt"
 
 [node name="Attack_Label" type="Label" parent="."]
@@ -599,5 +505,4 @@ offset_right = 46.0
 offset_bottom = -40.0
 text = "Velocity:"
 
-[connection signal="animation_finished" from="Animations" to="State_Machine/Shoot" method="_on_animations_animation_finished"]
-[connection signal="shot_finished" from="State_Machine/Shoot" to="State_Machine" method="_on_shoot_shot_finished"]
+[connection signal="animation_finished" from="Animations" to="Attack_Machine/Shoot" method="_on_animations_animation_finished"]

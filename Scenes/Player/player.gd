@@ -8,8 +8,9 @@ var state_machine: State_Machine
 @export 
 var attack_machine: State_Machine
 
-@onready 
-var animations = $Animations
+@export 
+var animations: AnimatedSprite2D
+
 @onready 
 var face_right := true
 
@@ -31,7 +32,7 @@ var state_label: Label
 
 func _ready() -> void: 
 	state_machine.init(self)
-	#attack_machine.init(self)
+	attack_machine.init(self)
 
 
 func _unhandled_input(event: InputEvent) -> void:
