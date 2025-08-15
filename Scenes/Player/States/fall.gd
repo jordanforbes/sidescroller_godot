@@ -1,0 +1,28 @@
+extends State
+
+#states that this state can move to
+@export 
+var idle_state: State
+@export 
+var walk_state: State
+
+func enter()-> void:
+	update_statename("Fall")
+	parent.animations.play("Air")
+
+func process_physics(delta: float) -> State:
+	parent.velocity.y += gravity * delta
+	parent.update_velocity()
+	
+	var movement = Input.get_axis("Left", "Right") * parent.move_speed
+	
+	if movement != 0:
+		parent.animations.flip_h = movement < 0
+	parent.velocity.x = movement
+	parent.move_and_slide()
+	
+	if parent.is_on_floor():
+		if movement != 0:
+			return walk_state
+		return idle_state
+	return null

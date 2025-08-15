@@ -1,0 +1,69 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpp45npefdmw3"]
+
+[ext_resource type="Texture2D" uid="uid://cp6ehwi7r8qda" path="res://Assets/Characters/Ogre/Spritesheets/ogre-idle.png" id="1_mw074"]
+[ext_resource type="Script" uid="uid://564l3u6ibiy1" path="res://Scenes/Enemy/enemy.gd" id="1_nvvbs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvvbs"]
+atlas = ExtResource("1_mw074")
+region = Rect2(0, 0, 144, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2t2r4"]
+atlas = ExtResource("1_mw074")
+region = Rect2(144, 0, 144, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmwl5"]
+atlas = ExtResource("1_mw074")
+region = Rect2(288, 0, 144, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d40jh"]
+atlas = ExtResource("1_mw074")
+region = Rect2(432, 0, 144, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gx76c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvvbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2t2r4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmwl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d40jh")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mw074"]
+radius = 20.0
+height = 58.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_nvvbs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gx76c")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+shape = SubResource("CapsuleShape2D_mw074")
+
+[node name="HPLabel" type="Label" parent="."]
+offset_left = -20.0
+offset_top = -47.0
+offset_right = 20.0
+offset_bottom = -24.0
+text = "HP:"
+
+[node name="NameLabel" type="Label" parent="." groups=["Enemies"]]
+offset_left = -19.0
+offset_top = -71.0
+offset_right = 21.0
+offset_bottom = -48.0
