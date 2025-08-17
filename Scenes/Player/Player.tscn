@@ -517,7 +517,7 @@ visible = false
 position = Vector2(-2, -6)
 sprite_frames = SubResource("SpriteFrames_tgfvv")
 animation = &"Shoot_Idle"
-frame_progress = 0.328613
+frame_progress = 0.484166
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 position = Vector2(-39, -30)
@@ -561,9 +561,8 @@ walk_state = NodePath("../Walk")
 shoot_state = NodePath("../Shoot")
 statelabel = NodePath("../../State_Label")
 
-[node name="Shoot" type="Node2D" parent="State_Machine" node_paths=PackedStringArray("no_attack_state")]
+[node name="Shoot" type="Node2D" parent="State_Machine"]
 script = ExtResource("9_825xp")
-no_attack_state = NodePath("../Idle")
 projectile_scene = ExtResource("11_i5acl")
 animation_name = "Shoot"
 

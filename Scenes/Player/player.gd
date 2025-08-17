@@ -19,6 +19,8 @@ var face_right := true
 var move_speed: float = 200
 @export
 var jump_force: float = 100
+@export 
+var HP:= 10
 
 #labels
 @export 
@@ -33,6 +35,9 @@ var state_label: Label
 func _ready() -> void: 
 	state_machine.init(self)
 	attack_machine.init(self)
+	
+func die() -> void:
+	print("player has died")
 
 
 func _unhandled_input(event: InputEvent) -> void:

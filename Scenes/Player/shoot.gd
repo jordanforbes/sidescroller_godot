@@ -9,7 +9,7 @@ extends State
 #@export 
 #var fall_state: State
 @export 
-var no_attack_state: State
+var idle_state: State
 
 @export 
 var projectile_scene: PackedScene
@@ -32,10 +32,10 @@ func play() -> void:
 	if !parent.is_on_floor():
 		parent.animations.play("Shoot_Air")
 	else:
-		if Input.is_action_pressed("Left") or Input.is_action_pressed("Right"):
-			parent.animations.play("Shoot_Walk")
-		else:
-			parent.animations.play("Shoot")
+		#if Input.is_action_pressed("Left") or Input.is_action_pressed("Right"):
+			#parent.animations.play("Shoot_Walk")
+		#else:
+		parent.animations.play("Shoot")
 
 	
 func spawn_projectile() -> void:
@@ -70,12 +70,14 @@ func process_physics(delta:float) -> State:
 	if Input.is_action_pressed("Right"):
 		movement += parent.move_speed
 	parent.velocity.x = movement
+	if movement != 0:
+		parent.animations.flip_h = movement < 0
 	
 	# Move character
 	parent.move_and_slide()
 	if finished == true: 
 		shot_finished.emit()
 		finished = false
-		return no_attack_state
+		return idle_state
 	else:
 		return null

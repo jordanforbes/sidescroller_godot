@@ -7,7 +7,7 @@ var direction := Vector2.RIGHT
 @export 
 var animations := AnimatedSprite2D
 @export 
-var dmg := 1
+var dmg :=2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,5 +22,5 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	print("body entered: ",body.name)
 	if body.has_method("take_damage"):
-		body.take_damage(1)
+		body.take_damage(dmg)
 	queue_free()
