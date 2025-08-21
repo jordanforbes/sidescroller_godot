@@ -19,9 +19,8 @@ func enter() -> void:
 
 func process_physics(delta: float) -> State:
 	#parent.update_velocity()
-	parent.velocity.y += gravity * delta
-	parent.velocity.x = Input.get_axis('Left', 'Right') * parent.move_speed
-	parent.move_and_slide()
+	
+	parent.travel()
 	
 	if Input.is_action_just_pressed("Shoot"):
 		print("shoot pressed")

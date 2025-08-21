@@ -13,8 +13,7 @@ func enter()-> void:
 	parent.animations.play("Air")
 
 func process_physics(delta: float) -> State:
-	parent.velocity.y += gravity * delta
-	#parent.update_velocity()
+
 	
 	var movement = Input.get_axis("Left", "Right") * parent.move_speed
 	
@@ -22,10 +21,8 @@ func process_physics(delta: float) -> State:
 		print("shoot pressed")
 		return shoot_state
 	
-	if movement != 0:
-		parent.animations.flip_h = movement < 0
-	parent.velocity.x = movement
-	parent.move_and_slide()
+	parent.travel()
+
 	
 	if parent.is_on_floor():
 		if movement != 0:

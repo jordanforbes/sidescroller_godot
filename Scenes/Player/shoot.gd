@@ -32,9 +32,6 @@ func play() -> void:
 	if !parent.is_on_floor():
 		parent.animations.play("Shoot_Air")
 	else:
-		#if Input.is_action_pressed("Left") or Input.is_action_pressed("Right"):
-			#parent.animations.play("Shoot_Walk")
-		#else:
 		parent.animations.play("Shoot")
 
 	
